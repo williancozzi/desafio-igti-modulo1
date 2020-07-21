@@ -81,12 +81,8 @@ function doSearch() {
       .includes(inputText.value.toLowerCase());
   });
 
-  render();
-  console.log("entrei aqui no render()");
-}
-
-function render() {
   renderFilteredPeople();
+  console.log("entrei aqui no render()");
 }
 
 function renderFilteredPeople() {
@@ -98,6 +94,7 @@ function renderFilteredPeople() {
     const personHTML = `
     <div class='person'>
       <div>
+      <br>
         <img src="${picture}" alt="${name}">
       </div>
       <div>
@@ -115,7 +112,7 @@ function renderFilteredPeople() {
   peopleHTML += "</div>";
 
   tabPeople.innerHTML = peopleHTML;
-  updateHtml(peopleHTML.length);
+  updateHtml(filteredPeople.length);
 }
 
 function isLoaded() {
@@ -138,7 +135,9 @@ function updateHtml(users) {
     txtUsers.textContent = "Nenhum usuário filtrado";
     txtStatistics.textContent = "Nada a ser exibido";
   } else {
-    tabPeople.innerHTML = "x usuário(s) encontrado(s)";
-    tabStatistics.innerHTML = "Estatísticas";
+    txtUsers.textContent = "";
+    txtStatistics.textContent = "";
+    txtUsers.innerHTML = `${users} usuário(s) encontrado(s)`;
+    txtStatistics.innerHTML = "Estatísticas";
   }
 }
