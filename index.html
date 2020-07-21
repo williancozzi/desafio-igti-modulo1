@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafio do módulo 1 - IGTI</title>
+  <link rel="stylesheet" href="./css/CSSReset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <div class="title">
+    <h1>Pesquisa de usuários</h1>
+    <div class="loading">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="51px" height="51px"
+        viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" fill="none" stroke="#1912fa" stroke-width="10" r="31"
+          stroke-dasharray="146.08405839192537 50.69468613064179">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s"
+            values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+        </circle>
+      </svg>
+      <span>Aguarde...</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="input-field">
+      <input type="text" id="input-text" />
+      <label id="lbl-search" for="input-text">Busca</label>
+    </div>
+    <button id="btn-search" class="waves-effect waves-light btn green-light darken-4">BUSCAR</button>
+
+  </div>
+
+  <div class="search-container">
+    <div class="people-list">
+      <h4>Nenhum usuário filtrado <span id="usuariosFiltrados"></span></h4>
+      <div id="tabPeople"></div>
+    </div>
+
+    <div class="people-statistics">
+      <h4>Nada a ser exibido <span id="statistics"></span></h4>
+      <div id="tabStatistics"></div>
+    </div>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>
