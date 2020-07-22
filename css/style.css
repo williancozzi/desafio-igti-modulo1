@@ -42,6 +42,7 @@ h1 {
   display: flex;
   width: 100vw;
   margin: 5px;
+  display: table-row;
   padding: 10px;
   margin-right: 70px;
   margin-top: 20px;
@@ -53,6 +54,7 @@ h1 {
   display: flex;
   width: 100vw;
   margin: 5px;
+  display: table-row;
   margin-top: 20px;
   margin-left: 70px;
   padding: 10px;
@@ -61,4 +63,12 @@ h1 {
 
 #imgs {
   border-radius: 50%;
+  margin-right: 10px;
+}
+
+#profile {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
 }

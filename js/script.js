@@ -3,6 +3,8 @@
 let allPeople = [];
 let filteredPeople = [];
 
+let numberFormat = null;
+
 let tabPeople = document.querySelector("#tab-people");
 let tabStatistics = document.querySelector("#tab-statistics");
 let inputText = document.querySelector("#input-text");
@@ -50,6 +52,7 @@ async function loadData() {
   });
 
   inputText.disabled = true;
+  numberFormat = Intl.NumberFormat("pt-BR");
   setTimeout(isLoaded, 1000);
 }
 
@@ -82,16 +85,12 @@ function renderFilteredPeople() {
 
     const personHTML = `
     <div class='person'>
-      <div>
+      <div id="profile">
       <br>
         <img src="${picture}" alt="${name}" id=imgs>
-      </div>
-      <div>
         <ul>
-          <li>${name}, </li>
-          <li>${age} anos</li>
+          <li>${name}, ${age} anos</li>
         <ul>
-      </div>
     </div>
     `;
 
@@ -129,16 +128,20 @@ function renderStatistics(users) {
     statsFemaleUsers.textContent = `Sexo feminino: ${femaleUsers}`;
     statsElement.appendChild(statsFemaleUsers);
 
-    // age sum
+    // age sum formatted
     let statsAgeSum = document.createElement("div");
     const usersAgeSum = users.reduce((acc, cur) => acc + cur.age, 0);
-    statsAgeSum.textContent = `Soma das idades: ${usersAgeSum}`;
+    statsAgeSum.textContent = `Soma das idades: ${formatNumber(
+      usersAgeSum.toFixed(2)
+    )}`;
     statsElement.appendChild(statsAgeSum);
 
-    // average age
+    // average age formatted
     let statsAgeAvg = document.createElement("div");
     const usersAgeAvg = usersAgeSum / users.length;
-    statsAgeAvg.textContent = `Média das idades: ${usersAgeAvg}`;
+    statsAgeAvg.textContent = `Média das idades: ${formatNumber(
+      usersAgeAvg.toFixed(2)
+    )}`;
     statsElement.appendChild(statsAgeAvg);
   }
 
@@ -170,4 +173,8 @@ function updateHtml(users) {
     txtUsers.innerHTML = `${users} usuário(s) encontrado(s)`;
     txtStatistics.innerHTML = "Estatísticas";
   }
+}
+
+function formatNumber(number) {
+  return numberFormat.format(number);
 }
