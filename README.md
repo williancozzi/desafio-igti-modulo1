@@ -4,7 +4,7 @@
 Criar uma aplicação para filtrar usuários e mostrar estatísticas a partir do filtro definido
 
 ## Resultado
-
+![Desafio-Do-Módulo-1-Igti-Google-Chrome-2020-07-22-01-36-52-1](https://user-images.githubusercontent.com/39573063/88136535-d753b200-cbbf-11ea-8294-121757ffe8b6.gif)
 
 ## Tecnologias e funções utilizadas
 * HTML 
