@@ -38,7 +38,7 @@ h1 {
 }
 
 .people-statistics{
-  border: 1px solid rgba(0, 0, 0, 0.171);
+  border: 1px solid rgba(0, 0, 0, 0.200);
   display: flex;
   width: 100vw;
   margin: 5px;
@@ -50,7 +50,7 @@ h1 {
 }
 
 .people-list {
-  border: 1px solid rgba(0, 0, 0, 0.171);
+  border: 1px solid rgba(0, 0, 0, 0.200);
   display: flex;
   width: 100vw;
   margin: 5px;
@@ -71,4 +71,8 @@ h1 {
   align-items: center;
   margin-top: 10px;
 
+}
+
+div {
+  margin-top: 5px;
 }
