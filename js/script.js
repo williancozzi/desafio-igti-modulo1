@@ -1,20 +1,3 @@
-//Challenge to-do:
-//(✓)Mostrar o loading enquanto carrega os dados
-//    e inabilita o input Text só enquanto carrega;
-//(✓)Na carga inicial da aplicação, obter os dados da api;
-//(✓)Carregar os dados dos usuários em um array;
-//(✓)Permitir a filtragem de usuários através de um input com
-//    interação do usuário;
-//(✓)O usuário poderá filtrar dados quando digitar pelo menos um
-//    caractere no input;
-//(✓)O usuário poderá filtrar os dados tanto digitando "Enter"
-//    quanto clicando no botão;
-//(✓)Montar dois painéis;
-//()No painel da esquerda, listar os usuários filtrados;
-//()No painel da esquerda, mostrar quantos usuários foram filtrados;
-//()No painel da direita, calcular e mostrar algumas estatísticas
-//    sobre esses usuários;
-
 "use strict";
 
 let allPeople = [];
@@ -22,12 +5,10 @@ let filteredPeople = [];
 
 let tabPeople = document.querySelector("#tab-people");
 let tabStatistics = document.querySelector("#tab-statistics");
-
 let inputText = document.querySelector("#input-text");
 let loading = document.querySelector(".loading");
 let btnSearch = document.querySelector("#btn-search");
 let lblSearch = document.querySelector("#lbl-search");
-
 let txtUsers = document.querySelector("#text-users");
 let txtStatistics = document.querySelector("#text-statistics");
 
@@ -38,7 +19,9 @@ window.addEventListener("load", () => {
 inputText.addEventListener("keyup", function events(e) {
   checkInput();
 
-  if (inputText.value.length > 0 && e.keyCode === 13) {
+  // checking the input
+  //prettier-ignore
+  if (inputText.value.length > 0 && e.keyCode === 13 && inputText.value.trim(" ")) {
     doSearch();
   }
 });
@@ -56,10 +39,14 @@ async function loadData() {
   allPeople = json.results.map((person) => {
     return {
       name: person.name.first + " " + person.name.last,
-      picture: person.picture,
+      picture: person.picture.thumbnail,
       age: person.dob.age,
       gender: person.gender,
     };
+  });
+
+  allPeople.sort((a, b) => {
+    return a.name.localeCompare(b.name);
   });
 
   inputText.disabled = true;
@@ -67,13 +54,14 @@ async function loadData() {
 }
 
 function checkInput() {
-  if (inputText.value.length > 0) {
+  if (inputText.value.length > 0 && inputText.value.trim(" ")) {
     btnSearch.disabled = false;
   } else {
     btnSearch.disabled = true;
   }
 }
 
+// compares what is in the input with what is coming from the array
 function doSearch() {
   filteredPeople = allPeople.filter((person) => {
     //prettier-ignore
@@ -82,9 +70,10 @@ function doSearch() {
   });
 
   renderFilteredPeople();
-  console.log("entrei aqui no render()");
+  renderStatistics(filteredPeople);
 }
 
+// alphabetically list the results and updates the html
 function renderFilteredPeople() {
   let peopleHTML = "<div>";
 
@@ -95,7 +84,7 @@ function renderFilteredPeople() {
     <div class='person'>
       <div>
       <br>
-        <img src="${picture}" alt="${name}">
+        <img src="${picture}" alt="${name}" id=imgs>
       </div>
       <div>
         <ul>
@@ -113,6 +102,47 @@ function renderFilteredPeople() {
 
   tabPeople.innerHTML = peopleHTML;
   updateHtml(filteredPeople.length);
+}
+
+// manipulate the DOM for the statistics
+function renderStatistics(users) {
+  tabStatistics.innerHTML = "";
+
+  let statsElement = document.createElement("div");
+
+  if (users.length !== 0) {
+    // male users filtered
+    let statsMaleUsers = document.createElement("div");
+    const maleUsers = users.reduce(
+      (acc, cur) => (cur.gender === "male" ? ++acc : acc),
+      0
+    );
+    statsMaleUsers.textContent = `Sexo masculino: ${maleUsers}`;
+    statsElement.appendChild(statsMaleUsers);
+
+    // female users filtered
+    let statsFemaleUsers = document.createElement("div");
+    const femaleUsers = users.reduce(
+      (acc, cur) => (cur.gender === "female" ? ++acc : acc),
+      0
+    );
+    statsFemaleUsers.textContent = `Sexo feminino: ${femaleUsers}`;
+    statsElement.appendChild(statsFemaleUsers);
+
+    // age sum
+    let statsAgeSum = document.createElement("div");
+    const usersAgeSum = users.reduce((acc, cur) => acc + cur.age, 0);
+    statsAgeSum.textContent = `Soma das idades: ${usersAgeSum}`;
+    statsElement.appendChild(statsAgeSum);
+
+    // average age
+    let statsAgeAvg = document.createElement("div");
+    const usersAgeAvg = usersAgeSum / users.length;
+    statsAgeAvg.textContent = `Média das idades: ${usersAgeAvg}`;
+    statsElement.appendChild(statsAgeAvg);
+  }
+
+  tabStatistics.appendChild(statsElement);
 }
 
 function isLoaded() {
