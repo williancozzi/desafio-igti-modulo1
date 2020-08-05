@@ -15,6 +15,9 @@ Criar uma aplicação para filtrar usuários e mostrar estatísticas a partir do
 * Métodos de arrays { map, filter, reduce, sort }
 * HTTP requests usando fetch
 
+## Teste a aplicação
+> https://igti-modulo1.netlify.app/
+
 ## Requisitos
 * Na carga inicial da aplicação, obter os dados de: https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo
 * Carregar os dados dos usuários em um array.
